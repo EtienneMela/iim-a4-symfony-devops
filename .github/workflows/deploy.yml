@@ -1,19 +1,19 @@
-name: Deploy Website to Heroku
+name: Deploy website to Heroku
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Do a git clone
-                uses: actions/checkout@v2
-            - name: Linter
-                uses: michaelw90/PHP-Lint@master
-            - name: Security check
-                uses: symfonycorp/security-checker-action@v2
-            - name: PHPStan
-                uses: docker://oskarstark/phpstan-ga
-                with:
-                    args: analyse src/ --level=5
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Init project
+        uses: actions/checkout@v2
+      - name: PHP Linter
+        uses: michaelw90/PHP-Lint@master
+      - name: Security checker
+        uses: symfonycorp/security-checker-action@v2
+      - name: PHPStan
+        uses: docker://oskarstark/phpstan-ga
+        with:
+          args: analyse src/ --level=5
